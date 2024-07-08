@@ -1,0 +1,87 @@
+const venom = require('venom-bot');
+const xlsx = require('xlsx');
+
+venom
+  .create({
+    session: 'session-name',
+    multidevice: true,
+    headless: 'new', // Deprecated uyarısını dikkate alarak güncelledik
+    qrTimeout: 0,
+  })
+  .then((client) => start(client))
+  .catch((error) => {
+    console.log(error);
+  });
+
+function start(client) {
+  const groupName = 'KANUNİ YURDU 1';
+
+  client.getAllChats().then((chats) => {
+    const group = chats.find((chat) => chat.name === groupName && chat.isGroup);
+
+    if (group) {
+      client.getGroupMembers(group.id._serialized).then((members) => {
+        const memberNumbers = members.map((member) => member.id.user);
+        console.log('Group Members:', memberNumbers);
+
+        // Üye numaralarını bir Excel dosyasına yazdırmak
+        const ws = xlsx.utils.json_to_sheet(memberNumbers.map((number) => ({ Number: number })));
+        const wb = xlsx.utils.book_new();
+        xlsx.utils.book_append_sheet(wb, ws, 'Group Members');
+
+        xlsx.writeFile(wb, 'group_members.xlsx');
+        console.log('Member numbers saved to group_members.xlsx');
+      }).catch((error) => {
+        console.error('Error getting group members:', error);
+      });
+    } else {
+      console.log(`Group '${groupName}' not found`);
+    }
+  }).catch((error) => {
+    console.error('Error getting chats:', error);
+  });
+}
+
+// to txt
+
+// const venom = require('venom-bot');
+
+// venom
+//   .create({
+//     session: 'session-name',
+//     multidevice: true,
+//     headless: true,
+//     qrTimeout: 0,
+//   })
+//   .then((client) => start(client))
+//   .catch((error) => {
+//     console.log(error);
+//   });
+
+// function start(client) {
+//   const groupName = 'KANUNİ YURDU 2';
+
+//   client.getAllChats().then((chats) => {
+//     const group = chats.find((chat) => chat.name === groupName && chat.isGroup);
+
+//     if (group) {
+//       client.getGroupMembers(group.id._serialized).then((members) => {
+//         const memberNumbers = members.map((member) => member.id.user);
+//         console.log('Group Members:', memberNumbers);
+
+//         // Üye numaralarını bir dosyaya yazdırmak
+//         const fs = require('fs');
+//         fs.writeFileSync('group_members.txt', memberNumbers.join('\n'));
+
+//         console.log('Member numbers saved to group_members.txt');
+//       }).catch((error) => {
+//         console.error('Error getting group members:', error);
+//       });
+//     } else {
+//       console.log(`Group '${groupName}' not found`);
+//     }
+//   }).catch((error) => {
+//     console.error('Error getting chats:', error);
+//   });
+// }
+
