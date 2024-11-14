@@ -1,0 +1,25 @@
+{
+  "name": "qrcode-base64",
+  "version": "1.0.1",
+  "description": "Generating the QR code in the form of Base64",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Pudon/qrcode-base64.git"
+  },
+  "keywords": [
+    "qrcode-base64",
+    "qrcode",
+    "wx",
+    "mini-program"
+  ],
+  "author": "Pudon",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Pudon/qrcode-base64/issues"
+  },
+  "homepage": "https://github.com/Pudon/qrcode-base64#readme"
+}
