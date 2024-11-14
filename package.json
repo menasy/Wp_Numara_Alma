@@ -1,0 +1,23 @@
+{
+  "name": "wp-numara-alma",
+  "version": "1.0.0",
+  "description": "Extracts WhatsApp group contacts to an Excel file using venom-bot.",
+  "main": "whatsap.js",
+  "scripts": {
+    "start": "node whatsap.js"
+  },
+  "keywords": [
+    "WhatsApp",
+    "venom-bot",
+    "xlsx",
+    "automation"
+  ],
+  "author": "Your Name",
+  "license": "ISC",
+  "dependencies": {
+    "sharp": "^0.33.4",
+    "superchats": "^3.7.4",
+    "venom-bot": "^5.1.0",
+    "xlsx": "^0.18.5"
+  }
+}
