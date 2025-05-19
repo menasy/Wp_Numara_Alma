@@ -15,13 +15,13 @@ venom
 
 function start(client)
 {
-	const groupNameList = ['KANUNİ YURDU 1', 'KANUNİ YURDU 2'];
+	const groupNameList = ["KANUNİ YURDU 1", "KANUNİ YURDU 2"];
 	let i = -1;
 	while(++i < groupNameList.length)
 	{
 		const groupName = groupNameList[i];
 		client.getAllChats().then((chats) => {
-		const group = chats.find((chat) => chat.name === groupName && chat.isGroup);
+		const group = chats.find((chat) => chat.name === groupName);
 		if (group)
 		{
 			client.getGroupMembers(group.id._serialized).then((members) =>
@@ -34,7 +34,6 @@ function start(client)
 					return number;
 				});
 				console.log('Group Members:', memberNumbers);
-				// Üye numaralarını bir Excel dosyasına yazdırmak
 				const ws = xlsx.utils.json_to_sheet(memberNumbers.map((number) => ({ Number: number })));
 				const wb = xlsx.utils.book_new();
 				xlsx.utils.book_append_sheet(wb, ws, 'Group Members');
